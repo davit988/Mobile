@@ -1,18 +1,22 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
 
 export const CartItems = ({ elm, updateCart }) => {
 
+  
+
+  
+
+  
   let [count, setCount] = useState(elm.count);
 
   const plus = () => {
     setCount(++count);
-    updateCart(count,)
+    updateCart(count);
   };
   const minus = () => {
-    if(count > 1){
-        setCount(--count);
-        updateCart(count,elm.id)
+    if (count > 1) {
+      setCount(--count);
+      updateCart(count, elm.id);
     }
   };
 
@@ -32,5 +36,3 @@ export const CartItems = ({ elm, updateCart }) => {
     </li>
   );
 };
-
-

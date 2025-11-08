@@ -18,7 +18,6 @@ const pages = [
   { title: "Home", path: "/" },
   { title: "Products", path: "/Products" },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const CartBadge = styled(Badge)`
   & .${badgeClasses.badge} {

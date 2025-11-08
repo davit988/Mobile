@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
 import { Layout } from "../components/Layout/Layout";
@@ -19,60 +19,61 @@ function App() {
 
   const [cart, setCart] = useState([]);
 
-  const cartLength = cart.length
+  const cartLength = cart.length;
 
-  console.log(cart);
   let bool = false;
 
+  const obj = useRef(false);
+  useEffect(() => {
+    if (obj.current) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    obj.current = true
+  }, [cart]);
+
   const addToCart = (item) => {
-
     cart.forEach((elm) => {
-
       if (elm.id === item.id) {
-
         bool = true;
 
         setCart(
           cart.map((c) => {
             if (c.id === item.id) {
-
               return {
                 ...c,
                 count: ++c.count,
                 initPrice: c.count * c.price,
               };
-            }
-            else{
-              return c
+            } else {
+              return c;
             }
           })
-
         );
       }
     });
-    if(!bool){
-       setCart((prev) => {
-        return [...prev,item]
-       })
+    if (!bool) {
+      setCart((prev) => {
+        return [...prev, item];
+      });
     }
-
-    
   };
 
-  const updateCart = (count,id) =>{
-    setCart(cart.map((c) => {
-          if(cart.id === id){
-          return{
+  const updateCart = (count, id) => {
+    setCart(
+      cart.map((c) => {
+        if (cart.id === id) {
+          return {
             ...c,
-            count : count,
-            initPrice : count * c.price
-          }
-        }else{
-          return c 
+            count: count,
+            initPrice: count * c.price,
+          };
+        } else {
+          return c;
         }
-        }))
-       
-  }
+      })
+    );
+  };
 
   useEffect(() => {
     instance
@@ -84,7 +85,6 @@ function App() {
       );
   }, []);
 
-  console.log(products);
 
   return (
     <>
@@ -96,7 +96,10 @@ function App() {
             element={<Products addToCart={addToCart} products={products} />}
           />
           <Route path="/products/:id" element={<Product />} />
-          <Route path="/carts" element={<Cart cart={cart} updateCart={updateCart}/>} />
+          <Route
+            path="/carts"
+            element={<Cart cart={cart} updateCart={updateCart} />}
+          />
         </Route>
       </Routes>
     </>
