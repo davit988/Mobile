@@ -1,0 +1,11 @@
+input {
+  border: 0.71px solid #bcbec0;
+  border-radius: 5px;
+  padding: 16px;
+  width: 450px;
+  height: 52px;
+}
+
+p{
+    color: red;
+}

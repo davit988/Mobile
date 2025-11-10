@@ -1,5 +1,7 @@
 import React , {useState,useEffect} from 'react'
 import { CartItems } from '../../components/CartItems/CartItems'
+import {  Formm } from '../../components/Form/Formm';
+
 
 export const Cart = ({updateCart}) => {
 
@@ -14,7 +16,7 @@ export const Cart = ({updateCart}) => {
 
   return (
     <div>
-      <ul>
+      <ul style={{display :"flex", justifyContent:"space-between", flexDirection:"column", gap :"25px"}}>
         {
           cart.map((elm) => {
             return (
@@ -23,6 +25,7 @@ export const Cart = ({updateCart}) => {
           })
         }
       </ul>
+      <Formm/>
     </div>
   )
 }

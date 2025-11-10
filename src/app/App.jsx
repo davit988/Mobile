@@ -68,12 +68,14 @@ function App() {
             count: count,
             initPrice: count * c.price,
           };
+          
         } else {
           return c;
         }
       })
     );
   };
+  console.log(cart);
 
   useEffect(() => {
     instance
