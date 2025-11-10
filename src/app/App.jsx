@@ -24,6 +24,7 @@ function App() {
   let bool = false;
 
   const obj = useRef(false);
+  
   useEffect(() => {
     if (obj.current) {
       localStorage.setItem("cart", JSON.stringify(cart));
