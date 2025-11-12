@@ -1,16 +1,8 @@
-import React, { useState, useEffect } from "react";
 import { CartItems } from "../../components/CartItems/CartItems";
 import { Formm } from "../../components/Form/Formm";
+export const Cart = () => {
 
-export const Cart = ({ updateCart }) => {
-  const [cart, setCart] = useState([]);
-
-  useEffect(() => {
-    const value = localStorage.getItem("cart");
-    if (value) {
-      setCart(JSON.parse(value)); // Update state if value found
-    }
-  }, []);
+  const cart = JSON.parse(localStorage.getItem('cart'))
 
   return (
     <div style={{ padding: "25px" }}>
@@ -23,7 +15,7 @@ export const Cart = ({ updateCart }) => {
         }}
       >
         {cart.map((elm) => {
-          return <CartItems key={elm.id} elm={elm} updateCart={updateCart} />;
+          return <CartItems key={elm.id} elm={elm} />;
         })}
       </ul>
       <Formm />

@@ -11,8 +11,11 @@ import {
 import { styled } from "@mui/material/styles";
 import Badge, { badgeClasses } from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCartOutlined";
-
+import { useContext } from "react";
+import { productContext } from "../../app/provider/provider";
 import { NavLink } from "react-router-dom";
+
+
 
 const pages = [
   { title: "Home", path: "/" },
@@ -26,7 +29,8 @@ const CartBadge = styled(Badge)`
   }
 `;
 
-function Header({cartLength}) {
+function Header() {
+  const { cartLength } = useContext(productContext);
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -67,13 +71,14 @@ function Header({cartLength}) {
               </Button>
             ))}
           </Box>
-          <Box
-          component={NavLink}
-          to={'/carts'}
-          >
+          <Box component={NavLink} to={"/carts"}>
             <IconButton>
               <ShoppingCartIcon fontSize="small" />
-              <CartBadge badgeContent={cartLength} color="primary" overlap="circular" />
+              <CartBadge
+                badgeContent={cartLength}
+                color="primary"
+                overlap="circular"
+              />
             </IconButton>
           </Box>
         </Toolbar>

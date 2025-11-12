@@ -1,7 +1,12 @@
+import { useContext } from "react";
+import { productContext } from "../../app/provider/provider";
 import { ProductCard } from "../../components/ProductCard/ProductCard";
 import { Box } from "@mui/material";
 
-export const Products = ({ products, addToCart }) => {
+export const Products = () => {
+  
+const {products, addToCart} =useContext(productContext)
+
   return (
     <Box>
       <Box

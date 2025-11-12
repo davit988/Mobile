@@ -1,7 +1,6 @@
 
 
-export const Home = ({products}) => {
-  console.log(products);
+export const Home = () => {
   
   return (
     <></>

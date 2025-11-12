@@ -9,6 +9,7 @@ import { Cart } from "../pages/Cart/Cart";
 import { Product } from "../pages/Product/Product";
 
 import "./Style/App.css";
+import { productContext } from "./provider/provider";
 
 export const instance = axios.create({
   baseURL: "https://fakestoreapi.com",
@@ -24,13 +25,13 @@ function App() {
   let bool = false;
 
   const obj = useRef(false);
-  
+
   useEffect(() => {
     if (obj.current) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
 
-    obj.current = true
+    obj.current = true;
   }, [cart]);
 
   const addToCart = (item) => {
@@ -69,7 +70,6 @@ function App() {
             count: count,
             initPrice: count * c.price,
           };
-          
         } else {
           return c;
         }
@@ -88,23 +88,29 @@ function App() {
       );
   }, []);
 
-
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Layout cartLength={cartLength} />}>
-          <Route index element={<Home products={products} />} />
-          <Route
-            path="/products"
-            element={<Products addToCart={addToCart} products={products} />}
-          />
-          <Route path="/products/:id" element={<Product />} />
-          <Route
-            path="/carts"
-            element={<Cart cart={cart} updateCart={updateCart} />}
-          />
-        </Route>
-      </Routes>
+      <productContext.Provider
+        value={{
+          cartLength,
+          addToCart,
+          products,
+          cart,
+          updateCart,
+        }}
+      >
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/products/:id" element={<Product />} />
+            <Route
+              path="/carts"
+              element={<Cart  />}
+            />
+          </Route>
+        </Routes>
+      </productContext.Provider>
     </>
   );
 }

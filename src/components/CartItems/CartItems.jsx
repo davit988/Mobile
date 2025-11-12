@@ -1,7 +1,9 @@
-import React, { useState, } from "react";
+import React, { useContext, useState } from "react";
+import { productContext } from "../../app/provider/provider";
 
-export const CartItems = ({ elm, updateCart }) => {
+export const CartItems = ({ elm }) => {
   let [count, setCount] = useState(elm.count);
+  const { updateCart } = useContext(productContext);
 
   const plus = () => {
     setCount(++count);
